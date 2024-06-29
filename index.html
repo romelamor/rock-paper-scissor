@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Rock,Paper,Scissor</title>
+</head>
+<style>
+   *{
+      align-items: center;
+      background-color:rgb(228, 214, 214);
+   }
+   .body{
+      padding: 10px;
+        border-radius: 5px;
+        height: 480px;
+        width:400px;
+        margin:auto;
+        background-color: white;
+        align-items: center;
+        margin-top: 50px;
+        box-shadow: 1px 10px 10px 5px;
+   }
+   .top,h1,span,b{
+      text-align: center;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      background-color:white;
+      color: black;
+      border-radius: 10px;
+      height: 50px;
+      
+   }
+   .game_options_images{
+      padding: 10px;
+        border-radius: 5px;
+        margin:auto;
+        background-color: white;
+        align-items: center;   
+   }
+   button{
+      transition: 0.3s;
+      height: 50px;
+      width: 100px;
+      border-radius: 5px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+   }
+   button:hover {
+  background-color: #e73333;
+  color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+  
+
+</style>
+<body>
+   <div class="body">
+      <div class="top"><h1>Rock-Paper-Scissors</h1>
+         <b>Player:</b><span id="player"></span><br><br>
+
+         <b>Computer:</b><span id="opponent"></span><br><br>
+
+         <div class="game_options_images">
+            <span id="img_opt_stone" onclick="gamestart('✊')">
+               <img src="stone.jpg" style="width:100px; height: 100px;">
+            </span>
+               <span id="game_options_images" onclick="gamestart('✋')">
+                  <img src="paper.jpg" style="width: 100px; height: 100px; border-radius: 100px;">
+               </span>
+            <span onclick="gamestart('✌')">
+               <img src="scissors.jpg" style="width: 100px; height: 100px;">
+            </span><br><br>
+            <b id="choices">Select your choice <br>To start the game</b><br><br>
+            <button onclick="reset()">Reset</button><br><br><br>
+            <b id="score">Score: Player 0 - 0 Computer</b>
+            
+         </div>
+
+
+      </div> 
+   </div>
+
+
+   <script>
+      let playerScore = 0;
+      let computerScore = 0; 
+      function gamestart(start) {
+         const choices = document.getElementById("choices");
+         const opponent= document.getElementById("opponent");
+         const player = document.getElementById("player");
+         const score = document.getElementById("score");
+         const random = Math.floor(Math.random() * 3);
+
+         if (random === 0) {
+            opponent.innerHTML = "✊";
+         } else if (random === 1) {
+            opponent.innerHTML = "✋";
+         } else if (random === 2) {
+            opponent.innerHTML = "✌";
+         }
+
+         if (start === "✊") {
+            player.innerHTML = "✊";
+         } else if (start === "✋") {
+            player.innerHTML = "✋";
+         } else if (start === "✌") {
+            player.innerHTML = "✌";
+         }
+
+         if (opponent.innerHTML === player.innerHTML) {
+            choices.innerHTML = "Tie!";
+         } else if (
+            (opponent.innerHTML === "✊" && player.innerHTML === "✋") || // if true only
+            (opponent.innerHTML === "✋" && player.innerHTML === "✌") ||
+            (opponent.innerHTML === "✌" && player.innerHTML === "✊") 
+         ) {
+            choices.innerHTML = "You won!";
+            playerScore++;
+            
+         } else {
+            choices.innerHTML = "computer won!";
+            computerScore++;
+            
+         }
+         score.innerHTML = `Score: Player ${playerScore} - ${computerScore} Computer`;
+         }
+
+         function reset() {
+         const choices = document.getElementById("choices");
+         const opponent = document.getElementById("opponent");
+         const player = document.getElementById("player");
+         const score = document.getElementById("score");
+         choices.innerHTML = "Select your choice ";
+         opponent.innerHTML = "";
+         player.innerHTML = "";
+         playerScore = 0;
+         computerScore = 0;
+         score.innerHTML = 'Player 0 - 0 Computer';
+
+         }
+      
+   </script>
+</body>
+</html> 
